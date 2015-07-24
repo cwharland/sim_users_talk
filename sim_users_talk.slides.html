@@ -39003,14 +39003,36 @@ width=500
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Quickly-on-aggregation">Quickly on aggregation<a class="anchor-link" href="#Quickly-on-aggregation">&#182;</a></h3><p>How should we properly aggregate raw logs before hitting them with stats stick?</p>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="81">
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example:">Example:<a class="anchor-link" href="#Example:">&#182;</a></h4><p>How do you calculate the <strong>average page click rate per user</strong>?</p>
+
+</div>
+</div>
+</div>
+    </div><div class="fragment" data-fragment-index="82">
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>I see alot of this:</p>
 <p><code>df.click.mean()</code></p>
 <p>Don't do that</p>
 
 </div>
 </div>
-</div></section>
+</div>
+    </div></section>
     </section><section>
     <section>
     
@@ -39047,7 +39069,7 @@ width=500
 </div>
 </div>
 
-</div><div class="fragment" data-fragment-index="83">
+</div><div class="fragment" data-fragment-index="85">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -39091,7 +39113,7 @@ User level click average: 0.108
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="85">
+</div><div class="fragment" data-fragment-index="87">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -39112,7 +39134,7 @@ User level click average: 0.108
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="86">
+    </div><div class="fragment" data-fragment-index="88">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -39143,7 +39165,7 @@ User level click average: 0.109
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="87">
+    </div><div class="fragment" data-fragment-index="89">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -39261,7 +39283,8 @@ Lift: 0.02
 </div>
 </div>
 
-</div>
+</div><div class="fragment" data-fragment-index="93">
+    
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -39273,7 +39296,31 @@ Lift: 0.02
 
 </div>
 </div>
-</div></section>
+</div>
+    </div><div class="fragment" data-fragment-index="94">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">correct_rollup</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">injected_lift</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+    <span class="c"># ratio - fraction of users effected by injected_lift</span>
+    
+    <span class="c"># calculate the user level lift</span>
+    <span class="n">user_lift</span> <span class="o">=</span> <span class="n">user_level_lift</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">impression_level_lift</span> <span class="o">=</span> <span class="n">impression_level_lift</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+    <span class="c"># Example case: ratio &lt; 1.0 and injected_lift &gt;= 0.10</span>
+    <span class="k">assert</span> <span class="n">user_lift</span> <span class="o">&lt;</span> <span class="n">impression_level_lift</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div></section>
     </section><section>
     <section>
     
